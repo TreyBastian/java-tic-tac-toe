@@ -1,11 +1,12 @@
 package TicTacToe;
-
 import java.util.Arrays;
-import java.util.Scanner;
+
 
 public class Game  {
     static char[][] board = new char[3][3];
-    static Scanner input = new Scanner(System.in);
+
+
+    Input choice = new Input();
 
     public static char[][] createBoard() {
         for (int i = 0; i < board.length; i++) {
@@ -50,13 +51,13 @@ public class Game  {
         return false;
     }
 
-    public static void playerTurn() {
+    public void playerTurn() {
         for (int i = 0; i < 9; i++) {
             boolean validMove = false;
             while (!validMove) {
                 if (i % 2 == 0) {
                     System.out.println("Player X Turn");
-                    int[] playerMove = playerChoice(board);
+                    int[] playerMove = choice.playerChoice(board);
                     if (board[playerMove[0]][playerMove[1]] == '_') {
                         board[playerMove[0]][playerMove[1]] = 'X';
                         validMove = true;
@@ -67,7 +68,7 @@ public class Game  {
                 }
                 else {
                     System.out.println("Player O Turn");
-                    int[] playerMove = playerChoice(board);
+                    int[] playerMove = choice.playerChoice(board);
                     if (board[playerMove[0]][playerMove[1]] == '_') {
                         board[playerMove[0]][playerMove[1]] = 'O';
                         validMove = true;
@@ -86,20 +87,6 @@ public class Game  {
         System.out.println("It's a draw!");
     }
 
-    public static int[] playerChoice(char[][] board) {
-        int row, col;
-        while (true) {
-            System.out.print("Enter your move (row and column): ");
-            row = input.nextInt();
-            col = input.nextInt();
-            if (row >= 0 && row < 3 && col >= 0 && col < 3) {
-                break;
-            }
-            else {
-                System.out.println("This is not a valid move. Please enter row and column between 0 and 2.");
-            }
-        }
-        return new int[]{row, col};
-    }
+
 
 }
