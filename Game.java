@@ -3,7 +3,7 @@ package TicTacToe;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Game extends Main {
+public class Game  {
     static char[][] board = new char[3][3];
     static Scanner input = new Scanner(System.in);
 
