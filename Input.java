@@ -3,20 +3,31 @@ package TicTacToe;
 import java.util.Scanner;
 
 public class Input {
-    static Scanner input = new Scanner(System.in);
+    private static final Scanner INPUT_SCANNER = new Scanner(System.in);
 
-    public static int[] playerChoice(char[][] board) {
-        int row, col;
-        while (true) {
-            System.out.print("Enter your move (row and column): ");
-            row = input.nextInt();
-            col = input.nextInt();
-            if (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == '_') {
-                break;
-            } else {
-                System.out.println("This is not a valid move. Please enter row and column between 0 and 2, and ensure the spot is empty.");
-            }
+    public static Move getPlayerMove() {
+     System.out.println("Enter the row and column number (0-2) separated by a space: ");
+     Move input = getValidMove();
+
+     if (input == null) {
+         System.out.println("Invalid input. Please try again.");
+         return getPlayerMove();
+     }
+
+     return input;
+    }
+
+    private static Move getValidMove() {
+        int row = INPUT_SCANNER.nextInt();
+        int col = INPUT_SCANNER.nextInt();
+
+        if (validateInput(row, col)) {
+            return new Move(row, col);
         }
-        return new int[]{row, col};
+        return null;
+    }
+
+    private static boolean validateInput(int row, int col) {
+        return row >= 0 && row < 3 && col >= 0 && col < 3;
     }
 }
